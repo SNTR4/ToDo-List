@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>ToDo LIST</title>
+    <link rel="stylesheet" href="dist/css/app.css">
+    <script src="https://use.fontawesome.com/e3ae05b8e6.js"></script>
+  </head>
+  <body>
+
+    <div class="main">
+      <h1>
+        <span class="break-down">T</span>
+        <span>o</span>
+        D
+        <span>o</span>
+        Li
+        <span>s</span>
+        t
+      </h1>
+
+      <div id="app">
+        <div class="form">
+          <form class="inputArea" @submit.prevent="addTodo">
+            <input type="text" class="inputText" placeholder="何をする？" v-model="newTodo">
+            <span class="error" v-show="hasError">やりたいことはない？</span>
+            <button class="btn" type="submit">リストに追加</button>
+          </form>
+        </div>
+
+        <div class="searchBox">
+          <i class="fa fa-search searchBox__icon" aria-hidden="true"></i>
+          <input type="text" v-model="searchText" class="searchBox__input" placeholder="何を探す？">
+        </div>
+
+        <ul class="todos">
+          <list-item v-for="todo in filteredTodos" @toggle="toggleDone(todo)" @edit="editTodo(todo)" @delete="removeTodo(todo)" @editdone="editDone(todo)" :key="todo.id" :todo="todo"></list-item>
+        </ul>
+        <span class="comment">項目をダブルクリックで編集 | shift + enterキー で編集を確定</span>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>© 2019 Shun.</p>
+    </footer>
+
+    <script src="dist/js/bundle.js"></script>
+  </body>
+</html>
